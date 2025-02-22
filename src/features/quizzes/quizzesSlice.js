@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit"
 const quizzesSlice = createSlice({
   name: "quizzes",
   initialState: {
-    quizzes: [],
+    quizzes: {},
   },
   reducers: {
     addQuize: (state, action) => {
-      state.quizzes.push(action.payload)
+      const { id } = action.payload
+      state.quizzes[id] = action.payload
     },
   },
 })

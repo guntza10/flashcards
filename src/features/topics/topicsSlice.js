@@ -7,7 +7,11 @@ const topicsSlice = createSlice({
   },
   reducers: {
     addTopic: (state, action) => {
-      state.topics.push({ ...action.payload, quizIds: [] })
+      const { id } = action.payload
+      state.topics[id] = {
+        ...action.payload,
+        quizIds: [],
+      }
     },
   },
 })
