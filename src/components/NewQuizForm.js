@@ -1,51 +1,58 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import ROUTES from "../app/routes";
-// import selectors
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { v4 as uuidv4 } from "uuid"
+import ROUTES from "../app/routes"
+
+import { useDispatch, useSelector } from "react-redux"
+import { selectTopics } from "../features/topics/topicsSlice"
+import { addQuize } from "../features/quizzes/quizzesSlice"
 
 export default function NewQuizForm() {
-  const [name, setName] = useState("");
-  const [cards, setCards] = useState([]);
-  const [topicId, setTopicId] = useState("");
-  const navigate = useNavigate();
-  const topics = {};  // Replace with topics 
-  const dispatch = useDispatch();
+  // external
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  // constant state
+  const topics = useSelector(selectTopics)
+
+  const [name, setName] = useState("")
+  const [cards, setCards] = useState([])
+  const [topicId, setTopicId] = useState("")
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (name.length === 0) {
-      return;
+    e.preventDefault()
+    if (!name || cards.length === 0 || !topicId) {
+      return
     }
 
-    const cardIds = [];
-
     // create the new cards here and add each card's id to cardIds
-    // create the new quiz here
+    const cardIds = []
 
-    const quizId = uuidv4();
-
-    // dispatch add quiz action 
-
+    const newQuiz = {
+      id: uuidv4(),
+      name,
+      topicId,
+      cardIds,
+    }
+    dispatch(addQuize(newQuiz))
     navigate(ROUTES.quizzesRoute())
-  };
+  }
 
   const addCardInputs = (e) => {
-    e.preventDefault();
-    setCards(cards.concat({ front: "", back: "" }));
-  };
+    e.preventDefault()
+    setCards(cards.concat({ front: "", back: "" }))
+  }
 
   const removeCard = (e, index) => {
-    e.preventDefault();
-    setCards(cards.filter((card, i) => index !== i));
-  };
+    e.preventDefault()
+    setCards(cards.filter((card, i) => index !== i))
+  }
 
   const updateCardState = (index, side, value) => {
-    const newCards = cards.slice();
-    newCards[index][side] = value;
-    setCards(newCards);
-  };
+    const newCards = cards.slice()
+    newCards[index][side] = value
+    setCards(newCards)
+  }
 
   return (
     <section>
@@ -103,5 +110,5 @@ export default function NewQuizForm() {
         </div>
       </form>
     </section>
-  );
+  )
 }
