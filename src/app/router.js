@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom"
 import AppLayout from "./AppLayout"
 import NewQuizForm from "../components/NewQuizForm"
 import NewTopicForm from "../components/NewTopicForm"
@@ -11,6 +12,10 @@ const routes = [
     path: "/",
     element: <AppLayout />,
     children: [
+      {
+        index: true,
+        element: <Navigate to="topics" replace />,
+      },
       { path: "topics", element: <Topics /> },
       { path: "topics/new", element: <NewTopicForm /> },
       { path: "topics/:topicId", element: <Topic /> },
