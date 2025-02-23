@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid"
 import ROUTES from "../app/routes"
 
 import { useDispatch, useSelector } from "react-redux"
-import { selectTopics } from "../features/topics/topicsSlice"
+import { addQuizToTopic, selectTopics } from "../features/topics/topicsSlice"
 import { addQuize } from "../features/quizzes/quizzesSlice"
 import { addCard } from "../features/cards/cardsSlice"
 
@@ -39,6 +39,7 @@ export default function NewQuizForm() {
       cardIds,
     }
     dispatch(addQuize(newQuiz))
+    dispatch(addQuizToTopic({ id: topicId, quizId: newQuiz.id }))
     navigate(ROUTES.quizzesRoute())
   }
 
