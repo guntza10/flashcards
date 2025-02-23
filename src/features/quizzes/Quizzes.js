@@ -12,15 +12,11 @@ export default function Quizzes() {
     <section className="center">
       <h1>Quizzes</h1>
       <ul className="quizzes-list">
-        {Object.values(quizzes).map((quiz) => {
-          console.log("ROUTES.quizRoute(quiz.id)", ROUTES.quizRoute(quiz.id))
-          console.log("==================")
-          return (
-            <Link key={quiz.id} to={ROUTES.quizRoute(quiz.id)}>
-              <li className="quiz">{quiz.name}</li>
-            </Link>
-          )
-        })}
+        {Object.values(quizzes).map((quiz) => (
+          <Link key={quiz.id} to={ROUTES.quizRoute(quiz.id)}>
+            <li className="quiz">{quiz.name}</li>
+          </Link>
+        ))}
       </ul>
       <Link to={ROUTES.newQuizRoute()} className="button">
         Create New Quiz
