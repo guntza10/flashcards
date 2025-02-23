@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-`Url`: https://flashcards-by-2morrowboyz.netlify.app/topics
+`Url`: https://flashcards-by-2morrowboyz.netlify.app
 
 ## Overview
 
